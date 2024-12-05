@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base::layout(~{::section})}">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+   <section>
+   <!--Start Slider  -->
+      <div id="carouselExample" class="carousel slide">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+   <img src="img/image4.png" class="d-block w-100" alt="..." height="350px">
+
+    </div>
+    <div class="carousel-item">
+      <img src="img/image5.png" class="d-block w-100" alt="..." height="350px">
+    </div>
+    <div class="carousel-item">
+      <img src="img/image2.png" class="d-block w-100" alt="..." height="350px">
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+ <!--End Slider  -->
+ 
+ <!--Start Category Module  -->
+ 
+<style>
+    .category-image {
+        width: 100%; /* Full width for better scaling */
+        height: 140px; /* Fixed height while maintaining aspect ratio */
+        object-fit: cover; /* Ensures image covers the area without distortion */
+        border-radius: 10px; /* Rounded corners */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a subtle shadow for 3D effect */
+        transition: transform 0.3s ease; /* Smooth hover effect */
+    }
+
+    .category-image:hover {
+        transform: scale(1.05); /* Slight zoom on hover for better interaction */
+    }
+
+    .card-body {
+        padding: 10px;
+    }
+
+    .card-rounded-circle {
+        overflow: hidden; /* Ensure images don’t overflow */
+    }
+
+    .text-center {
+        font-weight: bold;
+        font-size: 1.2em;
+    }
+</style>
+
+<div class="container">
+    <div class="row">
+        <p class="text-center fs-4">Category</p>
+        <div class="col-md-2" th:each="c:${category}">
+            <div class="card-rounded-circle shadow-sm p-3 mb-5 bg-body-tertiary rounded">
+                <div class="card-body text-center">
+                    <!-- Updated Image Tag -->
+                    <img th:src="@{'/img/E-com/'+${c.imageName}}" class="category-image" alt="[[${c.name}]]">
+                    <br>
+                    <!-- Updated Link -->
+                    <a th:href="@{'/products?category='+${c.name}}" class="text-decoration-none text-dark">
+                        [[${c.name}]]
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+          
+           <!-- <div class="col-md-2">
+               <div class="card-rounded-circle shadow-sm p-3 mb-5 bg-body-tertiary rounded">
+                   <div class="card-body text-center">
+                   <img src="img/E-com/pic2.png" width="65%" height="140px">
+                   <p>Weaving Handcrafts</p>
+                   </div>
+               </div>
+          </div> -->
+          
+          <!--  <div class="col-md-2">
+               <div class="card-rounded-circle shadow-sm p-3 mb-5 bg-body-tertiary rounded">
+                   <div class="card-body text-center">
+                   <img src="img/E-com/pic3.png" width="65%" height="140px">
+                   <p>Emboidery Handicrafts</p>
+                   </div>
+               </div>
+          </div> -->
+          <!-- 
+           <div class="col-md-2">
+               <div class="card-rounded-circle shadow-sm p-3 mb-5 bg-body-tertiary rounded">
+                   <div class="card-body text-center">
+                   <img src=@{/img/E-com/Clay.png} width="65%" height="140px">
+                   <p>Dhroka Handicrafts</p>
+                   </div>
+               </div>
+          </div> -->
+          
+           <!-- <div class="col-md-2">
+               <div class="card-rounded-circle shadow-sm p-3 mb-5 bg-body-tertiary rounded">
+                   <div class="card-body text-center">
+                   <img src="img/E-com/pic5.png" width="65%" height="140px">
+                   <p>Paper Handicrafts</p>
+                   </div>
+               </div>
+          </div> -->
+          
+          <!--  <div class="col-md-2">
+               <div class="card-rounded-circle shadow-sm p-3 mb-5 bg-body-tertiary rounded">
+                   <div class="card-body text-center">
+                   <img src="img/E-com/pic6.png" width="65%" height="140px">
+                   <p>Brass Handicrafts</p>
+                   </div>
+               </div>
+          </div> -->
+      </div>
+ </div>
+ 
+ 
+ <!--End Category Module  -->
+ 
+ 
+ <!--Start Latest Category Model  -->
+ 
+ <!--Start Latest Category Model-->
+<div class="container-fluid bg-light p-3">
+    <p class="text-center fs-4">Latest Product</p>
+    <div class="row">
+        <div class="col-md-2" th:each="p:${products}">
+            <div class="card-rounded-circle shadow-sm p-3 mb-5 bg-body-tertiary rounded">
+                <div class="card-body text-center">
+                    <img alt="" th:src="@{/img/Product1-img/{image}(image=${p.image})}" width="65%" height="140px">
+                    <p class="text-center"><a th:href="@{'/product/'+${p.id}}" class="text-decoration-none text-dark">[[${p.title}]]</a></p>
+                </div>
+            </div>
+        </div>
+
+       <!--  <div class="col-md-2">
+            <div class="card-rounded-circle shadow-sm p-3 mb-5 bg-body-tertiary rounded">
+                <div class="card-body text-center">
+                    <img alt="" src="img/Product-img/product2.png" width="65%" height="140px">
+                    <p class="text-center">Handicraft Hand Made Puja Thali</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <div class="card-rounded-circle shadow-sm p-3 mb-5 bg-body-tertiary rounded">
+                <div class="card-body text-center">
+                    <img alt="" src="img/Product-img/product3.png" width="65%" height="140px">
+                    <p class="text-center">Little India Gamestone Studded</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <div class="card-rounded-circle shadow-sm p-3 mb-5 bg-body-tertiary rounded">
+                <div class="card-body text-center">
+                    <img alt="" src="img/Product-img/product4.png" width="65%" height="140px">
+                    <p class="text-center">Little Odisha Handmade Elephant</p>
+                </div>
+            </div>
+        </div>
+        
+         <div class="col-md-2">
+            <div class="card-rounded-circle shadow-sm p-3 mb-5 bg-body-tertiary rounded">
+                <div class="card-body text-center">
+                    <img alt="" src="img/Product-img/product5.png" width="65%" height="140px">
+                    <p class="text-center">Handcrafted Multicolored Square Product</p>
+                </div>
+            </div>
+        </div>
+        
+         <div class="col-md-2">
+            <div class="card-rounded-circle shadow-sm p-3 mb-5 bg-body-tertiary rounded">
+                <div class="card-body text-center">
+                    <img alt="" src="img/Product-img/product6.png" width="65%" height="140px">
+                    <p class="text-center">Iron Set Musical Handmade</p>
+                </div>
+            </div>
+        </div> -->
+    </div>
+</div>
+<!--End Latest Category Model-->
+
+ 
+ <!--End Latest Category Model  -->
+   </section>
+
+</body>
+</html>

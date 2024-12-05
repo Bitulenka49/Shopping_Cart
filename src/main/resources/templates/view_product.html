@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base::layout(~{::section})}">
+<head>
+    <meta charset="UTF-8">
+    <title>Product Page</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <section>
+        <div class="container" style="margin-top: 70px; margin-bottom: 100px; border: 1px solid #ccc; padding: 20px; border-radius: 8px; box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);">
+            <div class="row">
+             <th:block th:if="${session.succMsg}">
+                                <p class="text-success alert alert-success text-center" role="alert">[[${session.succMsg}]]</p>
+                                <th:block th:text="${@commonServiceImpl.removeSessionMessage()}"></th:block>
+                               
+                                
+    
+                            </th:block>
+                            <!-- Error Message -->
+                            <th:block th:if="${session.errorMsg}">
+                                <p class="text-danger text-center alert alert-danger">[[${session.errorMsg}]]</p>
+                                <th:block th:text="${@commonServiceImpl.removeSessionMessage()}"></th:block> 
+                            </th:block>
+                <!-- Image Column -->
+                <div class="col-md-6 text-end">
+                    <img alt="" src="/img/Product1-img/download1.png" width="330px" height="400px" style="border: 1px solid #ccc; box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);">
+                </div>
+
+                <!-- Product Details Column -->
+                <div class="col-md-6">
+                    <div style="padding: 16px;">
+                        <!-- Product Info -->
+                        <p style="font-size: 1.5rem;">[[${product.title}]]</p>
+                        <p><span style="font-weight: bold;">Description: </span><br>[[${product.description}]]</p>
+                        <p>
+                            <span style="font-weight: bold;">Product Details: </span><br>
+                            Status: 
+                            
+                            
+                                <span style="background-color: #28a745; color: white; padding: 2px 6px; border-radius: 4px;">Available</span> 
+                                
+                            </th:block>
+                            
+                            <th:block th:unless="${product.stock>0}">
+                            <span style="background-color: #ffc107; color: black; padding: 2px 6px; border-radius: 4px;">Out of Stock</span><br>
+                                
+                            </th:block>
+                            
+                            Category: [[${product.category}]]<br>
+                            Policy: 7 Days Replacement & Return
+                        </p>
+                        <p style="font-size: 1.25rem; font-weight: bold;">
+                            Price: <i class="fas fa-rupee-sign"></i>
+                            [[${product.discountPrice}]]
+                            <span style="font-size: 1rem; text-decoration: line-through; color: gray;">[[${product.price}]]</span>
+                            2500 <span style="font-size: 1rem; color: green;">[[${product.discount}]]</span>
+                        </p>
+
+                        <!-- Additional Features -->
+                        <div class="row" style="margin-top: 20px;">
+                            <div class="col-md-4" style="text-align: center; padding: 10px;">
+                                <i class="fas fa-money-bill-wave" style="font-size: 2rem; color: green;"></i>
+                                <p>Cash On Delivery</p>
+                            </div>
+                            <div class="col-md-4" style="text-align: center; padding: 10px;">
+                                <i class="fas fa-undo" style="font-size: 2rem; color: red;"></i>
+                                <p>Return Available</p>
+                            </div>
+                            <div class="col-md-4" style="text-align: center; padding: 10px;">
+                                <i class="fas fa-shipping-fast" style="font-size: 2rem; color: blue;"></i>
+                                <p>Free Shipping</p>
+                            </div>
+                        </div>
+                        
+                        <th:block th:if="${product.stock>0}">
+                        <th:block th:if="${user==null}">
+                            <a href="/signin" class="btn btn-danger col-md-12" style="display: block; margin-top: 15px; text-align: center; padding: 10px;">
+                            Add To Cart</a>
+                        </th:block>
+                        
+                        <th:block th:unless="${user==null}">
+                            <a th:href="@{/user/addCart(pid=${product.id}, uid=${user.id})}" class="btn btn-danger col-md-12" style="display: block; margin-top: 15px; text-align: center; padding: 10px;">
+                            Add To Cart</a>
+                        </th:block>
+                        
+                        </th:block>
+                        
+                        <th:block th:unless="${product.stock>0}">
+                            <a href="#" class="btn  btn-warning col-md-12" style="display: block; margin-top: 15px; text-align: center; padding: 10px;">
+                            Out of Stock</a>
+                        
+                        </th:block>
+                        
+                        
+                    </div>
+                </div>                
+            </div>
+        </div>
+    </section>
+</body>
+</html>
